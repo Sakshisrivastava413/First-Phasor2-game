@@ -1,6 +1,7 @@
 var game = new Phaser.Game(800, 600, Phaser.CANVAS);
 
 var platforms;
+var stars;
 
 var gameState = {
     preload: function () {
@@ -33,9 +34,19 @@ var gameState = {
         player.body.collideWorldBounds = true;
         player.animations.add('right', [5, 6, 7, 8], 10, true);
         player.animations.add('left', [0, 1, 2, 3], 10, true);
+
+
+        stars = game.add.group();
+        stars.enableBody = true;
+        for (var i = 0; i < 12; i++) {
+            var star = stars.create(i * 70, 0, 'star');
+            star.body.gravity.y = 10;
+            star.body.bounce.y = 0.7 + Math.random() * 0.2;
+        }
     },
     update: function () {
         var hitPlatform = game.physics.arcade.collide(player, platforms);
+
         var cursors = game.input.keyboard.createCursorKeys();
 
 
