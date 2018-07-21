@@ -46,6 +46,7 @@ var gameState = {
     },
     update: function () {
         var hitPlatform = game.physics.arcade.collide(player, platforms);
+        game.physics.arcade.collide(stars, platforms);
 
         var cursors = game.input.keyboard.createCursorKeys();
 
