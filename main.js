@@ -19,7 +19,12 @@ var gameState = {
         var ground = platforms.create(0, game.world.height - 64, 'ground');
         ground.scale.setTo(2, 2);
         ground.body.immovable = true;
-   
+
+        var ledge = platforms.create(400, 400, 'ground');
+        ledge.body.immovable = true;
+        ledge = platforms.create(-150, 250, 'ground');
+
+           
     },
     update: function () {
 
