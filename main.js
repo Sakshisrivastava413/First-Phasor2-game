@@ -3,6 +3,9 @@ var game = new Phaser.Game(800, 600, Phaser.CANVAS);
 var platforms;
 var stars;
 
+var score = 0;
+var scoreText;
+
 var gameState = {
     preload: function () {
         game.load.image('background', 'assets/sky.png');
@@ -43,6 +46,8 @@ var gameState = {
             star.body.gravity.y = 10;
             star.body.bounce.y = 0.7 + Math.random() * 0.2;
         }
+        scoreText = game.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+
     },
     update: function () {
         var hitPlatform = game.physics.arcade.collide(player, platforms);
@@ -67,16 +72,15 @@ var gameState = {
         if (cursors.up.isDown && player.body.touching.down && hitPlatform) {
             player.body.velocity.y = -350;
         }
-
     }
 }
 
 function collectStar(player, star) {
     star.kill();
 
+    score += 10;
+    scoreText.text = 'Score: ' + score;
 }
-
-
 
 game.state.add('gameState', gameState);
 game.state.start('gameState');
