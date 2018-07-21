@@ -47,9 +47,9 @@ var gameState = {
     update: function () {
         var hitPlatform = game.physics.arcade.collide(player, platforms);
         game.physics.arcade.collide(stars, platforms);
+        game.physics.arcade.overlap(player, stars, collectStar, null, this);
 
         var cursors = game.input.keyboard.createCursorKeys();
-
 
         player.body.velocity.x = 0;
         if (cursors.left.isDown) {
@@ -68,8 +68,12 @@ var gameState = {
             player.body.velocity.y = -350;
         }
 
-
     }
+}
+
+function collectStar(player, star) {
+    star.kill();
+
 }
 
 
